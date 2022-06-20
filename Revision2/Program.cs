@@ -42,7 +42,44 @@ namespace Revision
 
                         break;
                     case "3":
-                        //TODO: calcular média geral
+                        decimal notaTotal = 0;
+                        var nrAlunos = 0;
+
+                        for (int i = 0; i < alunos.Length; i++)
+                        {
+                            if (!string.IsNullOrEmpty(alunos[i].Nome))
+                            {
+                                notaTotal += alunos[i].Nota;
+                                nrAlunos++;
+                            }
+                        }
+
+                        var mediaGeral = notaTotal / nrAlunos;
+                        Conceito conceitoGeral;
+
+                        if (mediaGeral < 2)
+                        {
+                            conceitoGeral = Conceito.E;
+                        }
+                        else if (mediaGeral < 4)
+                        {
+                            conceitoGeral = Conceito.D;
+                        }
+                        else if (mediaGeral < 6)
+                        {
+                            conceitoGeral = Conceito.C;
+                        }
+                        else if (mediaGeral < 8)
+                        {
+                            conceitoGeral = Conceito.B;
+                        }
+                        else
+                        {
+                            conceitoGeral = Conceito.A;
+                        }
+
+                        Console.WriteLine($"MÈDIA GERAL: {mediaGeral} - CONCEITO: {conceitoGeral}");
+
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -56,7 +93,7 @@ namespace Revision
 
         private static void Alumini(Aluno alumni)
         {
-            if (string.IsNullOrEmpty(alumni.Nome))
+            if (!string.IsNullOrEmpty(alumni.Nome))
             {
                 Console.WriteLine($"ALUNO: {alumni.Nome} - NOTA: {alumni.Nota}");
             }
